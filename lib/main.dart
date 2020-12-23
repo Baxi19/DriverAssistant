@@ -60,25 +60,29 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _topheader() {
-    return Padding(padding: EdgeInsets.only(left: 32),
+    return Padding(
+      padding: EdgeInsets.only(left: 32),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Text('Create\nYour\nAccount',
+          Text(
+            'Create\nYour\nAccount',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w600,
               fontSize: 28,
             ),
           ),
-          //Image.asset('assets/images/map.png',
-          //  height: 170,
-          //  fit: BoxFit.fitHeight,
-          //),
+          Image.asset(
+            'assets/img/map.png',
+            height: 170,
+            fit: BoxFit.fitHeight,
+            width: 170,
+          )
         ],
       ),
-
     );
   }
 }
+/*https://www.youtube.com/watch?v=GeNp8tC4Gak*/
