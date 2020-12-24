@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Image.asset(
-            'assets/img/map.png',
+            'assets/img/logo.png',
             height: 170,
             fit: BoxFit.fitHeight,
             width: 170,
