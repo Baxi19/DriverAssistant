@@ -10,7 +10,7 @@
 
 ## Segundo Proyecto 
 
-## Driver Assistant :computer:
+## Driver Assistant :computer: :camera:
 
 ## Randald Villegas Brenes
 
@@ -19,5 +19,3 @@
 ## II Semestre, 2020
 
 ---
-
-# DriverAssistant
