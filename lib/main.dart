@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
 void main() {
   runApp(MyApp());
 }
@@ -51,6 +52,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   topRight: Radius.circular(40),
                 ),
                 color: Colors.grey[50],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(height: 40),
+                      
+
+                    ],
+                ),
               ),
             ),
           ),
