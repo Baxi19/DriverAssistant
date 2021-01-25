@@ -1,101 +1,108 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:camera/camera.dart';
+import 'package:driver_assistant/User/ui/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
+import 'AI/ui/widgets/live_camera.dart';
+import 'widgets/button_bar.dart';
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'User/bloc/bloc_user.dart';
 
+// to generate the
+// keytool -exportcert -alias androiddebugkey -keystore "C:\Users\Baxi\.android\debug.keystore" -list -v
 
-void main() {
-  runApp(MyApp());
+List<CameraDescription> cameras;
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // initialize the cameras when the app starts
+  cameras = await availableCameras();
+  runApp(LoadData());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class LoadData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Driver Assistant',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return BlocProvider(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SignInScreen(),
       ),
-      home: MyHomePage(title: 'Driver Assistant Home Page'),
+      bloc: UserBloc(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
+class MyApp extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyAppState createState() => _MyAppState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyAppState extends State<MyApp> {
+  //final picker = ImagePicker();
+  UserBloc userBloc;
 
   @override
+  Widget build(BuildContext context) {
+
+    return PageView(
+        scrollDirection: Axis.vertical,
+        children: <Widget> [
+          ButtonsBar(0),
+          LiveFeed(cameras),
+        ],
+      //),
+    );
+  }
+
+  /*@override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFF3F51b5),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+      appBar: AppBar(
+        title: Text("Driving Assistant"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.developer_mode_rounded),
+            onPressed: aboutDialog,
+          ),
+        ],
+      ),
+      body: PageView(
         children: <Widget> [
-          SizedBox(
-            height: 70
+              page(),
+              StaticImage(),
+              LiveFeed(cameras),
+            ],
           ),
-          _topheader(),
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              margin: EdgeInsets.only(top:32),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40),
-                  topRight: Radius.circular(40),
-                ),
-                color: Colors.grey[50],
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(height: 40),
-                      
-
-                    ],
-                ),
-              ),
-            ),
-          ),
+      bottomNavigationBar: CurvedNavigationBar(
+        color:  Colors.black26,
+        backgroundColor: Colors.black26,
+        buttonBackgroundColor: Colors.cyan,
+        height: 50,
+        items: <Widget> [
+          Icon(Icons.image_outlined, size: 20, color: Colors.white),
+          Icon(Icons.home_outlined, size: 20, color: Colors.white),
+          Icon(Icons.camera_outlined, size: 20, color: Colors.white),
         ],
+        animationDuration: Duration(
+          milliseconds: 185,
+        ),
+        index: 1,
+        animationCurve: Curves.bounceInOut,
+        onTap: (index){
+          if(index == 0){
+            //Navigator.of(context).push(MaterialPageRoute(builder: (context) => Maps()));
+          }else if(index == 1){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Home()));
+          } else if(index == 2){
+            //Navigator.of(context).push(MaterialPageRoute(builder: (context) => Home()));
+          }
+          debugPrint("Current index is $index ");
+        },
       ),
     );
   }
 
-  _topheader() {
-    return Padding(
-      padding: EdgeInsets.only(left: 32),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            'Create\nYour\nAccount',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-              fontSize: 28,
-            ),
-          ),
-          Image.asset(
-            'assets/img/logo.png',
-            height: 170,
-            fit: BoxFit.fitHeight,
-            width: 170,
-          )
-        ],
-      ),
-    );
-  }
+   */
 }
-/*https://www.youtube.com/watch?v=GeNp8tC4Gak*/
